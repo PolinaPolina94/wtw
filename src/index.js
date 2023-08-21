@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import MainPage from "./components/main-page/Main-Page";
 import {data} from "./components/mock-data";
+import App from "./components/App";
 
 ReactDOM.render(
-    <MainPage data={data}/>,
+    <App data={data}/>,
     document.getElementById(`root`)
 );
