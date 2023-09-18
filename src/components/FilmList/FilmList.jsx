@@ -1,18 +1,30 @@
-import React from "react";
-import ReactDOM from 'react-dom';
-import {data} from "./components/mock-data";
-import App from "./components/App";
-import {films} from "./mocks/films";
-import {comments} from "./mocks/reviews";
+import React, {useState} from "react";
+import Card from "../Card/Card";
 import PropTypes from 'prop-types';
 
+const FilmList = ({films, comments}) => {
+  const [, setActiveCard] = useState(null);
+  const handleMouseEnter = (film) => {
+    setActiveCard(film);
+  };
+  const handleMouseLeave = () => {
+    setActiveCard(null);
+  };
+  // console.log(activeCard);
+  return (
+    <div className="catalog__movies-list">
+      {films.map((card) => {
+        // console.log(card);
+        return (
+          <Card key={card.id} item={card} films={films} comments={comments} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
+        );
+      })
+      }
+    </div>
+  );
+};
 
-ReactDOM.render(
-    <App data={data} films={films} comments={comments}/>,
-    document.getElementById(`root`)
-);
-
-App.propTypes = {
+FilmList.propTypes = {
   data: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -51,3 +63,5 @@ App.propTypes = {
       })
   )
 };
+
+export default FilmList;

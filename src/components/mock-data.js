@@ -23,7 +23,7 @@ export const data = [
   {
     id: `4`,
     href: `movie-page.html`,
-    name: `"Aviator`,
+    name: `Aviator`,
     img: `img/aviator.jpg`,
     alt: `Aviator`,
   },
