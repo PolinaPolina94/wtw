@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
 
-const FilmItem = ({films}) => {
+const FilmItem = ({film}) => {
   return (
     <>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={films.previewImage} alt={films.name} />
+            <img src={film.previewImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -31,10 +32,10 @@ const FilmItem = ({films}) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{films.name}</h2>
+              <h2 className="movie-card__title">{film.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{films.genre}</span>
-                <span className="movie-card__year">{films.released}</span>
+                <span className="movie-card__genre">{film.genre}</span>
+                <span className="movie-card__year">{film.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -50,7 +51,7 @@ const FilmItem = ({films}) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                <Link to={`${film.id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -59,7 +60,7 @@ const FilmItem = ({films}) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={films.posterImage} alt={films.name + ` poster`} width="218" height="327" />
+              <img src={film.posterImage} alt={film.name + ` poster`} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -78,19 +79,19 @@ const FilmItem = ({films}) => {
               </nav>
 
               <div className="movie-rating">
-                <div className="movie-rating__score">{films.rating}</div>
+                <div className="movie-rating__score">{film.rating}</div>
                 <p className="movie-rating__meta">
                   <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">{films.scoresCount}</span>
+                  <span className="movie-rating__count">{film.scoresCount}</span>
                 </p>
               </div>
 
               <div className="movie-card__text">
-                <p>{films.description}</p>
+                <p>{film.description}</p>
 
-                <p className="movie-card__director"><strong>Director: {films.director}</strong></p>
+                <p className="movie-card__director"><strong>Director: {film.director}</strong></p>
 
-                <p className="movie-card__starring"><strong>Starring: {films.starring}</strong></p>
+                <p className="movie-card__starring"><strong>Starring: {film.starring}</strong></p>
               </div>
             </div>
           </div>
@@ -101,6 +102,7 @@ const FilmItem = ({films}) => {
 };
 
 FilmItem.propTypes = {
+  filmId: PropTypes.number,
   data: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -110,28 +112,7 @@ FilmItem.propTypes = {
         alt: PropTypes.string.isRequired,
       })
   ),
-  films: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        posterImage: PropTypes.string.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        backgroundImage: PropTypes.string.isRequired,
-        backgroundColor: PropTypes.string.isRequired,
-        videoLink: PropTypes.string.isRequired,
-        previewVideoLink: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        scoresCount: PropTypes.number.isRequired,
-        director: PropTypes.string.isRequired,
-        starring: PropTypes.array.isRequired,
-        runTime: PropTypes.number.isRequired,
-        genre: PropTypes.string.isRequired,
-        released: PropTypes.number.isRequired,
-        isFavorite: PropTypes.bool.isRequired,
-
-      })
-  ),
+  film: PropTypes.object,
   comments: PropTypes.arrayOf(
       PropTypes.shape({
         rating: PropTypes.number.isRequired,

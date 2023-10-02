@@ -1,20 +1,20 @@
+/* eslint-disable no-console */
 import React, {useState} from "react";
 import Card from "../Card/Card";
 import PropTypes from 'prop-types';
 
 const FilmList = ({films, comments}) => {
-  const [, setActiveCard] = useState(null);
+  const [activeCard, setActiveCard] = useState(null);
   const handleMouseEnter = (film) => {
     setActiveCard(film);
   };
   const handleMouseLeave = () => {
     setActiveCard(null);
   };
-  // console.log(activeCard);
+  console.log(activeCard);
   return (
     <div className="catalog__movies-list">
       {films.map((card) => {
-        // console.log(card);
         return (
           <Card key={card.id} item={card} films={films} comments={comments} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
         );

@@ -2,7 +2,7 @@ export const films = [
   {
     "id": 1,
     "name": `The Grand Budapest Hotel`,
-    "posterImage": `img/bg-the-grand-budapest-hotel-poster.jpg`,
+    "posterImage": `img/bg-the-grand-budapest-hotel.jpg`,
     "previewImage": `img/bg-the-grand-budapest-hotel.jpg`,
     "backgroundImage": `img/bg-the-grand-budapest-hotel.jpg`,
     "backgroundColor": `#ffffff`,

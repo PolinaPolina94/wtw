@@ -1,17 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
-import Header from "../Header/Header";
+// import Header from "../Header/Header";
+import {useParams} from "react-router-dom";
 
 
-const AddReview = () => {
+const AddReview = ({films}) => {
+  const filmParams = useParams();
+  const filmId = Number(filmParams.id);
+  const currentFilm = films.filter((film)=> filmId === film.id)[0];
+
+  const [text, setText] = useState(``);
+
+  const saveText = function (e) {
+    setText(e.target.value);
+    console.log(text);
+  };
   return (
     <>
-      <Header/>
-
+      {/* <Header/> */}
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -28,7 +38,7 @@ const AddReview = () => {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                  <a href="movie-page.html" className="breadcrumbs__link">{currentFilm.name}</a>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -44,7 +54,7 @@ const AddReview = () => {
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={currentFilm.backgroundImage} alt={currentFilm.name} width="218" height="327" />
           </div>
         </div>
 
@@ -85,11 +95,12 @@ const AddReview = () => {
             </div>
 
             <div className="add-review__text">
-              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-              <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
-              </div>
-
+              <form>
+                <textarea onChange={(e)=>saveText(e)} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text">{text}</textarea>
+                <div className="add-review__submit">
+                  <button className="add-review__btn" type="submit">Post</button>
+                </div>
+              </form>
             </div>
           </form>
         </div>
